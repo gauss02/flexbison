@@ -6,31 +6,35 @@
 
 # programs in chapter 1
 
+LDFLAGS=-L/usr/lib -lfl
+LEX=flex
+CC=gcc
+
 all:	  fb1-1 fb1-2 fb1-3 fb1-4 fb1-5
 
-
 fb1-1:	fb1-1.l
-	flex $<
-	cc -o $@ lex.yy.c -lfl
+	$(LEX) $<
+	$(CC) -o $@ lex.yy.c $(LDFLAGS)
 
 fb1-2:	fb1-2.l
-	flex $<
-	cc -o $@ lex.yy.c -lfl
+	$(LEX) $<
+	$(CC) -o $@ lex.yy.c $(LDFLAGS)
 
 fb1-3:	fb1-3.l
-	flex $<
-	cc -o $@ lex.yy.c -lfl
+	$(LEX) $<
+	$(CC) -o $@ lex.yy.c $(LDFLAGS)
 
 fb1-4:	fb1-4.l
-	flex $<
-	cc -o $@ lex.yy.c -lfl
+	$(LEX) $<
+	$(CC) -o $@ lex.yy.c $(LDFLAGS)
 
 fb1-5:	fb1-5.l fb1-5.y
 	bison -d fb1-5.y
-	flex fb1-5.l
-	cc -o $@ fb1-5.tab.c lex.yy.c -lfl
+	$(LEX) fb1-5.l
+	$(CC) -o $@ fb1-5.tab.c lex.yy.c $(LDFLAGS)
 
 clean:
+	rm -f fb1-1.exe fb1-2.exe fb1-3.exe fb1-4.exe fb1-5.exe;
 	rm -f fb1-1 fb1-2 fb1-3 fb1-4 fb1-5 \
 	lex.yy.c fb1-5.tab.c fb1-5.tab.h
 
